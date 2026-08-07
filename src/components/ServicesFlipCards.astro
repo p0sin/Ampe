@@ -1,0 +1,207 @@
+---
+/*
+  DOCUMENTACIÓN DEL COMPONENTE SERVICESFLIPCARD
+  =============================================
+  
+  Este componente muestra una cuadrícula de servicios utilizando tarjetas interactivas con efecto flip.
+  Al hacer clic en cada tarjeta, gira para mostrar información adicional en el reverso.
+  
+  CARACTERÍSTICAS:
+  - Tarjetas interactivas con efecto flip al hacer clic
+  - Diseño responsivo que se adapta a diferentes tamaños de pantalla
+    * 1 columna en móvil
+    * 2 columnas en tablets (sm)
+    * 4 columnas en desktop (lg)
+  - Animación suave de transición de 0.6 segundos
+  - Frente: muestra imagen y título
+  - Reverso: muestra título y descripción detallada
+  
+  ESTRUCTURA DE DATOS:
+  El componente utiliza un array SERVICES con objetos que contienen:
+  - img: Imagen SVG importada (ruta al archivo)
+  - title: Título del servicio
+  - description: Descripción detallada que aparece en el reverso
+  
+  CONTENIDO DE EJEMPLO:
+  En esta plantilla se utiliza texto Lorem ipsum para los títulos y descripciones.
+  Para implementar en producción, reemplazar con contenido real relevante a tu proyecto.
+  
+  PERSONALIZACIÓN:
+  - Contenido: Modificar el array SERVICES con tus propios servicios
+  - Altura: Ajustar height en .flip-card-container (actualmente 150px)
+  - Colores: Personalizar bg-accent, text-primary, text-dark según tu paleta
+  - Bordes y sombras: Modificar rounded-md y shadow-custom
+  - Animación: Cambiar la duración en transition: transform 0.6s
+  
+  RESPONSIVE DESIGN:
+  - grid-cols-1 sm:grid-cols-2 lg:grid-cols-4: Define el número de columnas por breakpoint
+  - gap-4 md:gap-6: Controla el espacio entre tarjetas
+  
+  DEPENDENCIAS:
+  - Requiere astro:assets para optimización de imágenes
+  - Necesita los archivos SVG importados al inicio
+  - Incluye JavaScript en línea para manejar los eventos de clic
+  - Contiene estilos CSS internos para el efecto flip
+  
+  ACCESIBILIDAD:
+  - Considera añadir atributos aria-* y roles para mejorar la accesibilidad
+  - Se podría mejorar añadiendo mensajes para lectores de pantalla
+  
+  EJEMPLO DE USO:
+  ```
+  ---
+  import ServicesFlipCards from '../components/ServicesFlipCards.astro';
+  ---
+  
+  <Layout>
+    <ServicesFlipCards />
+  </Layout>
+  ```
+*/
+import { Image } from 'astro:assets';
+
+const SERVICES = [
+  {
+    img: '/services/cancer.svg',
+    title: 'Lorem Ipsum',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisis, eros vel finibus placerat.',
+  },
+  {
+    img: '/services/cancer.svg',
+    title: 'Dolor Sit',
+    description: 'Praesent aliquet, odio ac imperdiet finibus, nisl nisl aliquam nunc, vel rhoncus justo mi ut eros.',
+  },
+  {
+    img: '/services/cancer.svg',
+    title: 'Amet Elit',
+    description: 'Vivamus vitae fermentum nisi. Cras aliquam eleifend enim, in congue lectus pretium eu.',
+  },
+  {
+    img: '/services/cancer.svg',
+    title: 'Nullam Sed',
+    description: 'Integer faucibus maximus enim, vitae tincidunt tortor sodales non. Vestibulum vel arcu sit amet odio.',
+  },
+  {
+    img: '/services/cancer.svg',
+    title: 'Vestibulum',
+    description: 'Fusce non varius justo. Vivamus fringilla accumsan magna, sed convallis libero pellentesque sed.',
+  },
+  {
+    img: '/services/cancer.svg',
+    title: 'Quisque Erat',
+    description: 'Etiam at ex in magna interdum interdum. Pellentesque habitant morbi tristique senectus et netus.',
+  },
+  {
+    img: '/services/cancer.svg',
+    title: 'Sed Viverra',
+    description: 'Mauris euismod mauris eu ligula placerat, vel sagittis nunc ultricies. Nulla sit amet dolor sit amet.',
+  },
+  {
+    img: '/services/cancer.svg',
+    title: 'Nunc Euismod',
+    description: 'Curabitur ut dolor nec nisi rhoncus finibus. Suspendisse potenti. Aenean vitae fringilla ligula.',
+  },
+];
+---
+
+<section id="services" class="py-12">
+  <div class="container w-full max-w-screen-lg px-4 md:px-0 mx-auto">
+    <p class="font-light text-lg md:text-xl text-center mb-4 px-4 sm:px-8 md:px-0">
+      Lorem ipsum <b class="font-bold">dolor sit amet consectetur adipiscing elit</b>
+      sed do eiusmod tempor
+    </p>
+    <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+      {
+        SERVICES.map((service) => (
+          <div class="flip-card-container">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <!-- Frente de la tarjeta (Título e imagen) -->
+                <div class="flip-card-front p-4 rounded-md shadow-custom bg-accent">
+                  <div class="flex items-center h-full">
+                    <div class="flex-shrink-0 mr-4">
+                      <Image
+                        src={service.img}
+                        alt={service.title}
+                        height="60"
+                        width="60"
+                        decoding="async"
+                        class="object-contain w-16 h-16"
+                      />
+                    </div>
+                    <div>
+                      <p class="font-semibold text-primary">{service.title}</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Reverso de la tarjeta (Descripción) -->
+                <div class="flip-card-back p-4 rounded-md shadow-custom bg-accent">
+                  <div class="flex flex-col justify-center h-full">
+                    <p class="font-semibold text-primary mb-2">{service.title}</p>
+                    <p class="text-dark font-light">{service.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Seleccionar todas las tarjetas
+  const flipCards = document.querySelectorAll('.flip-card');
+  
+  // Agregar evento de click a cada tarjeta
+  flipCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      // Alternar clase para el efecto flip
+      card.classList.toggle('flipped');
+    });
+  });
+</script>
+
+<style>
+  /* Estilos para las flip cards */
+  .flip-card-container {
+    perspective: 1000px;
+    height: 150px;
+  }
+  
+  .flip-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+  
+  .flip-card.flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+</style>

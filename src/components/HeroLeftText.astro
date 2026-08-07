@@ -1,0 +1,82 @@
+---
+import CTAButton from './CTAButton.astro';
+---
+
+<!--   
+
+  DOCUMENTACIÓN DEL COMPONENTE HERO
+  ================================
+  
+  Este componente constituye la sección principal (hero) de la landing page.
+  
+  CARACTERÍSTICAS:
+  - Diseño responsivo con diferentes fondos para móvil y escritorio
+  - Estructura flexible que se adapta a diferentes tamaños de pantalla
+  - Texto centrado en móvil y alineado a la izquierda en pantallas más grandes
+  - Incluye título principal, subtítulo y un botón de llamada a la acción (CTA)
+  
+  PERSONALIZACIÓN:
+  - Imagen de fondo: Cambiar la URL en bg-[url(...)]
+  - Altura del hero: Modificar el valor en min-h-[600px]
+  - Logo: Reemplazar la URL del placeholder en el elemento img
+  - Textos: Reemplazar los placeholders (lorem ipsum) con contenido real
+  - Ancho del contenido: Ajustar las clases según necesidad
+  
+  DEPENDENCIAS:
+  - Requiere el componente CTAButton.astro
+  - Utiliza clases de Tailwind CSS para todos los estilos
+
+ -->
+<section
+  id="hero"
+  class="relative overflow-hidden max-h-screen min-h-[600px] bg-[url(https://placehold.co/1920x1080)] bg-cover bg-no-repeat"
+>
+  <div class="relative">
+    <div
+      class="container max-w-7xl h-full mx-auto text-center md:text-left flex flex-col px-4 lg:px-0 pt-7 md:pt-12 pb-3 md:pb-42 relative z-10"
+    >
+      <img
+        src="https://placehold.co/200x80"
+        alt="Logo placeholder"
+        class="mx-auto md:mx-0 md:max-w-36"
+        fetchpriority="high"
+        loading="eager"
+      />
+      <p class="text-[#575757] font-light text-xs pt-9 md:pt-12">
+        Lorem ipsum dolor sit amet
+      </p>
+      <p
+        class="text-secondary font-bold text-sm md:text-md md:text-2xl md:max-w-md md:pt-1.5"
+      >
+        Nombre del profesional
+      </p>
+      <h1
+        class="font-extralight text-lg md:text-4xl md:max-w-xl pt-4 px-4 md:px-0"
+      >
+        Lorem ipsum dolor sit amet consectetur <span class="font-semibold"
+          >adipiscing elit</span
+        >
+      </h1>
+      <p
+        class="font-extralight text-white md:text-black text-xs md:text-lg max-w-65 md:max-w-xl pt-68 md:pt-6 mx-auto md:mx-0"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation.
+      </p>
+      <div
+        class="hidden md:block pt-[15px] md:pt-9 justify-center md:justify-start"
+      >
+        <CTAButton />
+      </div>
+      <div class="md:hidden pt-7 justify-center">
+        <img
+          src="https://placehold.co/24x24"
+          alt="Arrow placeholder"
+          class="w-3 mx-auto"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</section>

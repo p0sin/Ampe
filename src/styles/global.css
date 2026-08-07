@@ -1,0 +1,50 @@
+/**
+ * DOCUMENTACIÓN DEL ARCHIVO
+ * =======================
+ * 
+ * Este archivo configura Tailwind CSS con el plugin DaisyUI para crear un tema personalizado.
+ * 
+ * CARACTERÍSTICAS:
+ * - Importa Tailwind CSS como base
+ * - Activa el plugin DaisyUI con tema predeterminado "light"
+ * - Define un tema personalizado con:
+ *   - Fuentes tipográficas (sans, serif y mono)
+ *   - Paleta de colores completa para la identidad visual
+ *   - Configuración de colores para textos, fondos y componentes
+ * 
+ * CÓMO PERSONALIZAR:
+ * - Para cambiar el tema predeterminado: modifica el valor en la sección "themes"
+ * - Para modificar la paleta de colores: cambia los valores hexadecimales en las variables --color-*
+ * - Para cambiar las fuentes: edita las listas en las variables --font-*
+ * 
+ * REFERENCIAS DE VARIABLES:
+ * - Variables de tema de Tailwind: https://tailwindcss.com/docs/theme#default-theme-variable-reference
+ * - Variables CSS de DaisyUI: https://daisyui.com/docs/utilities/#theme-css-variables
+ * 
+ * Las variables definidas abajo pueden personalizarse según las necesidades del proyecto.
+ * Consulta las referencias para ver todas las opciones disponibles.
+ */
+
+ @import "tailwindcss";
+
+ @plugin "daisyui" {
+     themes: light --default; 
+ }
+ 
+ @plugin "daisyui/theme" {
+     name: "light";
+     default: true;
+     
+     --font-sans: "Inter", "Helvetica Neue", Arial, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+     --font-serif: "Merriweather", "Georgia Pro", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+     --font-mono: "Fira Code", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+ 
+     --color-primary: #0B7EDE;
+     --color-primary-content: #ffffff;
+     --color-secondary: #F7313B;
+     --color-secondary-content: #ffffff;
+     --color-text-primary: #161616;
+     --color-bg-neutral: #292929;
+     --color-accent: #F6FDFD;
+     --color-info: #0EB3EE;
+ }

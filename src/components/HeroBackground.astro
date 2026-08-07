@@ -1,0 +1,53 @@
+---
+import CTAButton from './CTAButton.astro';
+---
+
+<!--   
+
+  DOCUMENTACIÓN DEL COMPONENTE HERO
+  ================================
+  
+  Este componente constituye la sección principal (hero) de la landing page.
+  
+  CARACTERÍSTICAS:
+  - Diseño responsivo con diferentes fondos para móvil y escritorio
+  - Estructura flexible que se adapta a diferentes tamaños de pantalla
+  - Texto centrado en móvil y alineado a la izquierda en pantallas más grandes
+  - Incluye título principal, subtítulo y un botón de llamada a la acción (CTA)
+  
+  PERSONALIZACIÓN:
+  - Imágenes de fondo: Cambiar las rutas en bg-[url(/heroBgMobile.webp)] y bg-[url(/heroBg.webp)]
+  - Altura del hero: Modificar el valor en style="height: 600px;"
+  - Textos: Reemplazar el contenido de los elementos h1 y h2
+  - Ancho del contenido: Ajustar las clases w-full md:w-1/2 según necesidad
+  
+  DEPENDENCIAS:
+  - Requiere el componente CTAButton.astro
+  - Utiliza clases de Tailwind CSS para todos los estilos
+
+ -->
+<section id="hero">
+  <div
+    class={`bg-right md:bg-center bg-cover bg-no-repeat bg-[url(https://placehold.co/1920x1080)] lg:bg-[url(https://placehold.co/1920x1080] w-full`}
+  >
+    <div class="container max-w-7xl w-full mx-auto text-center md:text-left">
+      <div
+        class="flex flex-col gap-10 w-full md:w-1/2 justify-center px-4 lg:px-0 pb-24 md:pb-0"
+        style="height: 600px;"
+      >
+        <h1 class="font-light text-2xl md:text-4xl">
+          TÍTULO PRINCIPAL <b class="font-extrabold">DESTACADO</b>
+        </h1>
+        <h2>Cedulas</h2>
+        <h2 class="font-regular text-md md:text-lg max-w-sm">
+          Subtítulo descriptivo con información relevante <span
+            class="text-red-400">destacada en color.</span
+          >
+        </h2>
+        <div>
+          <CTAButton />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

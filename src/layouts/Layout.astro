@@ -1,0 +1,134 @@
+---
+import '../styles/global.css';
+
+import { SEO } from 'astro-seo';
+
+import Footer from '../components/Footer.astro';
+
+const URL = import.meta.env.PUBLIC_SITE_URL
+/** ID de Google Tag Manager (ej: GTM-XXXXXXX). Solo se inyecta el script si está definido y no está vacío. */
+const GTM =
+  typeof import.meta.env.PUBLIC_GTM === 'string'
+    ? import.meta.env.PUBLIC_GTM.trim()
+    : ''
+
+/**
+ * COMPONENTE SEO PARA LANDING PAGES (Astro)
+ * =========================================
+ *
+ * Configuración optimizada para SEO y redes sociales.
+ *
+ * @prop {string} title - Título principal (pestaña del navegador y resultados de búsqueda).
+ *   - Máx. 60 caracteres. Incluir keywords principales.
+ *   - Ejemplo: "Gestor de Proyectos XYZ | Organiza tu equipo"
+ *
+ * @prop {string} description - Meta descripción (resultados de búsqueda).
+ *   - Máx. 160 caracteres. Describir el contenido y usar keywords.
+ *   - Ejemplo: "Herramienta todo-en-uno para equipos remotos con automatización de flujos."
+ *
+ * @prop {object} openGraph - Metadatos para redes sociales (Facebook, LinkedIn, etc.).
+ *   @property {object} basic - Configuración básica OpenGraph.
+ *     @prop {string} title - Título para redes sociales (puede diferir del meta title).
+ *     @prop {string} type - Tipo de contenido ('website', 'article', 'product', etc.).
+ *     @prop {string} image - URL absoluta de la imagen destacada (1200x630px recomendado).
+ *
+ * @prop {object} extend - Etiquetas adicionales personalizadas.
+ *   @property {array} link - Elementos <link> (favicon, canonical, etc.).
+ *     Ejemplo: [{ rel: 'icon', href: '/favicon.ico' }]
+ *   @property {array} meta - Meta tags personalizados (opcional).
+ *     Ejemplo: [{ name: 'theme-color', content: '#FFFFFF' }]
+ *
+ * USO BÁSICO:
+ * <SEO
+ *   title="Título optimizado"
+ *   description="Descripción con keywords"
+ *   openGraph={{ basic: { title: "...", type: "website", image: "..." }}}
+ * />
+ */
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <SEO
+      title="A Very Descriptive Title"
+      description="A heavily optimized description full of well-researched keywords."
+      openGraph={{
+        basic: {
+          title: 'A Very Descriptive Title',
+          type: 'website',
+          image: `${URL}/image.webp`, // https://url.com/image.webp
+        },
+      }}
+      extend={{
+        // extending the default link tags
+        link: [{ rel: 'icon', href: '/favicon.ico' }],
+      }}
+    />
+
+    <!-- Google Tag Manager (solo se carga si PUBLIC_GTM está definido en .env o en variables de despliegue) -->
+    {GTM && (
+      <script define:vars={{ gtmId: GTM }}>
+        (function(w,d,s,l,i){
+          w[l]=w[l]||[];
+          w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+          var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+          j.async=true;
+          j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+          f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',gtmId);
+      </script>
+    )}
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"
+    ></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&family=Lexend:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Cambiar href por imagen principal -->
+    <link rel="preload" as="image" href="/imagen.webp" />
+
+    <title>LP Title</title>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript): usa el mismo PUBLIC_GTM -->
+    {GTM && (
+      <noscript>
+        <iframe 
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM}`}
+          height="0" 
+          width="0" 
+          style="display:none;visibility:hidden">
+        </iframe>
+      </noscript>
+    )}
+    <!-- End Google Tag Manager -->
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

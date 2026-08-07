@@ -1,0 +1,96 @@
+---
+/*
+  DOCUMENTACIÓN DEL COMPONENTE PAYMENTMETHODS
+  ===========================================
+
+  Este componente muestra los distintos métodos de pago disponibles en la clínica u organización.
+  Presenta cada método con un ícono representativo, título y breve descripción.
+
+  CARACTERÍSTICAS:
+  - Distribución en tarjetas simples con íconos e información centrada
+  - Diseño responsivo:
+    * 1 columna en móvil
+    * 3 columnas en pantallas medianas (md)
+  - Uso de imágenes SVG optimizadas con astro:assets
+  - Sección destacada con fondo de color (bg-accent) y bordes redondeados
+
+  ESTRUCTURA DE DATOS:
+  Utiliza un array METHODS con objetos que contienen:
+  - img: Imagen SVG importada
+  - title: Título del método de pago
+  - description: Descripción breve del método
+
+  PERSONALIZACIÓN:
+  - Colores: bg-accent, text-primary y estilos pueden adaptarse a la paleta del proyecto
+  - Contenido: editar el array METHODS con nuevos métodos de pago
+  - Layout: puedes modificar el número de columnas cambiando las clases de grid
+
+  ACCESIBILIDAD:
+  - Las imágenes usan atributo alt con el título del método
+  - Se recomienda verificar contraste de colores y tamaño de fuente en móviles
+
+  EJEMPLO DE USO:
+
+  ```
+  ---
+  import PaymentMethods from '../components/PaymentMethods.astro';
+  ---
+  
+  <Layout>
+    <PaymentMethods />
+  </Layout>
+  ```
+*/
+import { Image } from 'astro:assets';
+
+const METHODS = [
+  {
+    img: '/payments/aseguradoras.svg',
+    title: 'Lorem Ipsum',
+    description: 'Pellentesque habitant morbi tristique senectus et netus.',
+  },
+  {
+    img: '/payments/efectivo.svg',
+    title: 'Dolor Sit Amet',
+    description: 'Integer nec odio. Praesent libero. Sed cursus ante dapibus.',
+  },
+  {
+    img: '/payments/tarjetas.svg',
+    title: 'Consectetur Adipiscing',
+    description:
+      'Donec quam felis, ultricies nec, pellentesque eu, pretium quis.',
+  },
+];
+---
+
+<section class="image-cta">
+  <div
+    class="container w-full max-w-screen-lg mx-auto flex flex-col gap-2 p-12 justify-center items-center text-center bg-accent rounded-lg"
+  >
+    <p class="font-extrabold tracking-wider text-xl md:text-3xl text-primary">
+      Lorem ipsum dolor sit amet
+    </p>
+    <p class="text-lg md:text-3xl font-light">
+      Curabitur blandit tempus porttitor. Lorem ipsum dolor sit.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+      {
+        METHODS.map((m) => (
+          <div class="grid-item flex flex-col justify-center items-center p-4 gap-4">
+            <Image
+              width={60}
+              height={60}
+              alt={m.title}
+              src={m.img}
+              class="object-contain"
+              loading="lazy"
+            />
+            <p class="text-primary font-semibold text-xl">{m.title}</p>
+            <p>{m.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

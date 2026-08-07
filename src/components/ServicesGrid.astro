@@ -1,0 +1,100 @@
+---
+/*
+  DOCUMENTACIÓN DEL COMPONENTE SERVICESGRID
+  =========================================
+  
+  Este componente muestra una cuadrícula de servicios médicos con tarjetas simples.
+  Se posiciona debajo del Hero con un z-index para superponerse ligeramente a la siguiente sección.
+  
+  CARACTERÍSTICAS:
+  - Grid responsivo: 2 columnas en móvil, 4 en desktop
+  - Tarjetas con ícono a la izquierda y texto a la derecha
+  - Posicionamiento relativo con z-index para superponerse a la siguiente sección
+  - Margen negativo superior para crear efecto de superposición
+  
+  PERSONALIZACIÓN:
+  - Contenido: Modificar el array SERVICES con tus propios servicios
+  - Colores: Ajustar bg-secondary-content y border-[#0D213F] según tu paleta
+  - Espaciado: Modificar -mt-18 para ajustar la superposición
+  - z-index: Cambiar z-20 según necesidad
+  
+  PLACEHOLDER:
+  Este componente utiliza contenido placeholder que debe ser reemplazado con datos reales.
+*/
+
+// Array de servicios placeholder - Reemplazar con datos reales
+const SERVICES = [
+  {
+    icon: '/placeholder-icon.svg',
+    iconMobile: '/placeholder-icon.svg',
+    title: 'Servicio 1',
+  },
+  {
+    icon: '/placeholder-icon.svg',
+    iconMobile: '/placeholder-icon.svg',
+    title: 'Servicio 2',
+  },
+  {
+    icon: '/placeholder-icon.svg',
+    iconMobile: '/placeholder-icon.svg',
+    title: 'Servicio 3',
+  },
+  {
+    icon: '/placeholder-icon.svg',
+    iconMobile: '/placeholder-icon.svg',
+    title: 'Servicio 4',
+  },
+  {
+    icon: '/placeholder-icon.svg',
+    iconMobile: '/placeholder-icon.svg',
+    title: 'Servicio 5',
+  },
+  {
+    icon: '/placeholder-icon.svg',
+    iconMobile: '/placeholder-icon.svg',
+    title: 'Servicio 6',
+  },
+  {
+    icon: '/placeholder-icon.svg',
+    iconMobile: '/placeholder-icon.svg',
+    title: 'Servicio 7',
+  },
+  {
+    icon: '/placeholder-icon.svg',
+    iconMobile: '/placeholder-icon.svg',
+    title: 'Servicio 8',
+  },
+];
+---
+
+<section id="services-grid" class="relative z-20 mt-5 md:-mt-18">
+  <div class="container max-w-7xl mx-auto px-4 lg:px-0">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+      {
+        SERVICES.map((service, index) => (
+          <div class="bg-secondary-content w-40 md:w-2xs rounded-lg py-4 md:py-9 flex items-center justify-center mx-auto md:px-10 gap-5 border border-[#0D213F]/10">
+            <div class="shrink-0">
+              <img
+                src={service.iconMobile}
+                alt={service.title}
+                width="40"
+                height="40"
+                class="w-full object-contain block md:hidden"
+              />
+              <img
+                src={service.icon}
+                alt={service.title}
+                width="40"
+                height="40"
+                class="w-12 object-contain hidden md:block"
+              />
+            </div>
+            <p class="text-secondary font-light text-xs md:text-lg">
+              {service.title}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

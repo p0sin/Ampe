@@ -1,0 +1,134 @@
+---
+const REVIEWS = [
+  {
+    name: 'Paciente Lomo Alto',
+    headline: 'Cirugía reconstructiva de marmoleado',
+    content:
+      '"<em>Diagnóstico: exceso de cocción en parrilla. Tras una intervención de 4 horas (a 63°C al vacío), recuperó su jugosidad. ¡Hoy disfruta de una segunda vida como carpaccio!</em>"',
+  },
+  {
+    name: 'Paciente Panceta Ahumada',
+    headline: 'Tratamiento exitoso contra la deshidratación',
+    content:
+      '"<em>Presentaba cuadro de rigidez y salinidad elevada. Tras terapia de rehidratación con bourbon y jarabe de arce, logró un equilibrio perfecto entre crocancia y ternura.</em>"',
+  },
+  {
+    name: 'Paciente Costillar BBQ',
+    headline: 'Injerto de especias exitoso',
+    content:
+      '"<em>Admitido por falta de corteza (bark). Tras aplicar nuestro rub secreto y 12 horas de humo de mezquite, desarrolló una costra exterior digna de competencia.</em>"',
+  },
+  {
+    name: 'Paciente Jamón Ibérico',
+    headline: 'Rehabilitación de curación prolongada',
+    content:
+      '"<em>Llegó con pronóstico reservado (demasiado fresco). Tras 36 meses en nuestra UCI (Unidad de Curado Ibérico), alcanzado nivel de bellota 5J. ¡Milagro de la maduración!</em>"',
+  },
+  {
+    name: 'Paciente Chorizo Artesanal',
+    headline: 'Trasplante de especias',
+    content:
+      '"<em>Diagnóstico: mezcla pobre de pimentón. Le implantamos nuestra receta ancestral (ajo, orégano y pimienta negra). Ahora es el alma de las parrilladas.</em>"',
+  },
+  {
+    name: 'Paciente Tocino Crispy',
+    headline: 'Liposucción de grasa subcutánea',
+    content:
+      '"<em>Intervenido para lograr proporción ideal de grasa/músculo (70/30). Resultado: crujiente perfecto sin doblarse. ¡Ideal para pancakes!</em>"',
+  },
+  {
+    name: 'Paciente Morcilla',
+    headline: 'Transfusión de sangre y arroz',
+    content:
+      '"<em>Ingresó con anemia cárnica. Tras relleno de emergencia con ingredientes premium, logramos textura cremosa y sabor intenso. ¡Alta gastronómica concedida!</em>"',
+  },
+  {
+    name: 'Paciente Pierna Glaseada',
+    headline: 'Prótesis de miel y mostaza',
+    content:
+      '"<em>Presentaba fractura de corteza (glaseado inconsistente). Aplicamos nuestro tratamiento con cepillado cada 20 minutos. Resultado: brillo espejo y caramelización perfecta.</em>"',
+  },
+  {
+    name: 'Paciente Chicharrón',
+    headline: 'Terapia de shock térmico',
+    content:
+      '"<em>Caso crítico de humedad residual. Tras inmersión en aceite a 200°C, logramos expansión celular óptima. ¡Crocancia certificada por 12 horas!</em>"',
+  },
+  {
+    name: 'Paciente Cochinillo',
+    headline: 'Cirugía estética de piel dorada',
+    content:
+      '"<em>Intervenido para lograr dorado uniforme (efecto "piel de tambor"). Tras 6 horas de trabajo, obtuvo certificación Michelin. ¡Caso de estudio!</em>"',
+  },
+];
+
+// import function to register Swiper custom elements
+import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+register();
+---
+
+<section class="reviews-slider py-16 overflow-hidden">
+  <div class="container w-full mx-auto relative">
+    <!-- Título -->
+    <p class="font-extralight text-2xl text-primary text-center mb-8">
+      Historias de <span class="font-bold">"pacientes bien curados"</span>
+      <span class="block text-lg">(literalmente)</span>
+    </p>
+    <!-- Swiper -->
+    <div
+      class="relative w-full px-4 sm:px-0 sm:w-screen sm:-ml-[calc(50vw-50%)]"
+    >
+      <swiper-container
+        slides-per-view="auto"
+        autoplay-delay="5000"
+        center-slides="true"
+        speed="30"
+        css-mode="true"
+        space-between="24"
+        loop="true"
+        scrollbar="true"
+      >
+        {
+          REVIEWS.map((review) => (
+            <swiper-slide
+              class="swiper-slide my-12"
+              style="width: 100%; max-width: 420px;"
+            >
+              <div class="w-full h-[340px] rounded-lg overflow-hidden flex flex-col shadow-lg">
+                <div class="h-[125px] bg-[#FAFAFA] p-4 flex items-center text-center">
+                  <p class="font-primary font-semibold text-center text-primary text-xl">
+                    {review.headline}
+                  </p>
+                </div>
+
+                <div class="h-[215px] bg-primary px-6 sm:px-12 py-6 flex flex-col items-center text-center">
+                  <p
+                    class="text-white text-sm italic"
+                    set:html={review.content}
+                  />
+                  <p class="font-extralight text-white text-xl mt-auto">
+                    -{review.name}
+                  </p>
+                </div>
+              </div>
+            </swiper-slide>
+          ))
+        }
+      </swiper-container>
+    </div>
+
+    <!-- Paginación y navegación -->
+    <div class="flex justify-center mt-6">
+      <div class="reviews-pagination"></div>
+    </div>
+    <div
+      class="swiper-button-prev absolute left-6 top-1/2 transform -translate-y-1/2 z-10"
+    >
+    </div>
+    <div
+      class="swiper-button-next absolute right-6 top-1/2 transform -translate-y-1/2 z-10"
+    >
+    </div>
+  </div>
+</section>

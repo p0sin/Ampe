@@ -1,0 +1,202 @@
+---
+/*
+/*
+  DOCUMENTACIÓN DEL COMPONENTE CONTACT
+  =============================================
+
+  Este componente muestra una sección de contacto con varias tarjetas informativas y un mapa incrustado.
+  Las tarjetas incluyen información como ubicación, horario, teléfono y WhatsApp, cada una con un ícono representativo.
+
+  CARACTERÍSTICAS:
+  - Muestra un conjunto de tarjetas con iconos y texto descriptivo.
+  - Las tarjetas incluyen enlaces clicables para facilitar la comunicación (teléfono, WhatsApp).
+  - Diseño responsivo adaptado a diferentes tamaños de pantalla:
+    * 1 columna en móvil
+    * 2 columnas en tablets (sm)
+    * 4 columnas en desktop (lg)
+  - Mapa incrustado de Google Maps para ubicación.
+  - Estilo limpio y organizado con uso de imágenes optimizadas.
+  - Uso de clases TailwindCSS para diseño y responsividad.
+
+  ESTRUCTURA DE DATOS:
+  El componente utiliza un array `contactInfo` con objetos que contienen:
+  - `title`: Título de la información (Ej. "Ubicación", "Horario").
+  - `description`: Descripción detallada de la información (Ej. dirección, horario de atención).
+  - `icon`: Ruta del ícono SVG que representa el tipo de información.
+  - `link`: (opcional) Enlace para las tarjetas de teléfono o WhatsApp, si está presente, la tarjeta se convierte en clicable.
+
+  CONTENIDO DE EJEMPLO:
+  En esta plantilla se utilizan valores de contacto ficticios y ejemplos de íconos para ilustrar la funcionalidad. 
+  Para implementación en producción, reemplazar con los valores reales de contacto de tu empresa.
+
+  PERSONALIZACIÓN:
+  - Contenido: Modificar el array `contactInfo` para incluir la información específica de tu empresa.
+  - Iconos: Cambiar los íconos en las rutas de los archivos SVG.
+  - Estilo de texto: Personalizar las clases de TailwindCSS como `text-primary` o `font-semibold` según tu paleta de colores.
+  - Mapa: Ajustar el enlace del mapa en el iframe para mostrar la ubicación correcta.
+
+  RESPONSIVE DESIGN:
+  - grid-cols-1 sm:grid-cols-2 lg:grid-cols-4: Define el número de columnas por breakpoint.
+  - gap-2 md:gap-4: Controla el espacio entre las tarjetas dependiendo del tamaño de la pantalla.
+  - El mapa se adapta automáticamente al tamaño de la pantalla gracias a las clases de TailwindCSS.
+
+  DEPENDENCIAS:
+  - Requiere Astro:assets para la optimización de imágenes SVG.
+  - Los íconos deben ser importados al inicio del archivo.
+  - El iframe de Google Maps se embebe directamente en el HTML y debe ser configurado con la URL correspondiente.
+
+  ACCESIBILIDAD:
+  - Considera añadir atributos `aria-*` y `role="link"` a las tarjetas clicables para mejorar la accesibilidad.
+  - Puedes agregar descripciones adicionales para cada tarjeta con el atributo `aria-label` si es necesario.
+
+  EJEMPLO DE USO:
+
+  ```
+  ---
+  import Contact from '../components/Contact.astro';
+  ---
+  
+  <Layout>
+    <Contact />
+  </Layout>
+  ```
+*/
+import { Image } from 'astro:assets';
+
+const contactInfo = [
+  {
+    title: 'Lorem ipsum:',
+    description: 'Curabitur blandit tempus porttitor. Nulla vitae elit libero.',
+    icon: '/contact/llamadas.svg',
+  },
+  {
+    title: 'Vestibulum tempus:',
+    description:
+      'Aenean lacinia bibendum nulla sed consectetur. Donec sed odio dui.',
+    icon: '/contact/llamadas.svg',
+  },
+  {
+    title: 'Telephono:',
+    description: '(00) 1234 5678',
+    icon: '/contact/llamadas.svg',
+    link: 'tel:+000000000000',
+  },
+  {
+    title: 'WhatsApp:',
+    description: '(00) 1234 5678',
+    icon: '/contact/llamadas.svg',
+    link: '#',
+  },
+];
+---
+
+<section class="contact py-12">
+  <div class="container max-w-screen-lg mx-auto px-4">
+    <!-- Primera fila: Texto introductorio -->
+    <div class="mb-8 text-center">
+      <p class="text-lg md:text-2xl font-light">
+        Contactanos para <b class="font-semibold"
+          >resolver dudas, agendar una consulta</b
+        >
+      </p>
+      <p class="text-lg md:text-2xl font-light">
+        <b class="font-semibold">o conocer más</b> sobre nuestros servicios oncológicos.
+      </p>
+    </div>
+
+    <!-- Segunda fila: Información de contacto en 4 columnas -->
+    <div class="grid grid-cols-12 gap-2 mb-8">
+      <div
+        class="col-span-3 flex items-start gap-3 p-4 rounded-md shadow-sm bg-gray-50"
+      >
+        <div class="flex-shrink-0">
+          <Image
+            src={contactInfo[0].icon}
+            alt={contactInfo[0].title}
+            width={24}
+            height={24}
+            class="object-contain"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h3 class="text-primary font-semibold">{contactInfo[0].title}</h3>
+          <p class="text-sm">{contactInfo[0].description}</p>
+        </div>
+      </div>
+
+      <div
+        class="col-span-3 flex items-start gap-3 p-4 rounded-md shadow-sm bg-gray-50"
+      >
+        <div class="flex-shrink-0">
+          <Image
+            src={contactInfo[1].icon}
+            alt={contactInfo[1].title}
+            width={24}
+            height={24}
+            class="object-contain"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h3 class="text-primary font-semibold">{contactInfo[1].title}</h3>
+          <p class="text-sm">{contactInfo[1].description}</p>
+        </div>
+      </div>
+
+      <div
+        class="col-span-3 flex items-start gap-3 p-4 rounded-md shadow-sm bg-gray-50"
+      >
+        <div class="flex-shrink-0">
+          <Image
+            src={contactInfo[2].icon}
+            alt={contactInfo[2].title}
+            width={24}
+            height={24}
+            class="object-contain"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h3 class="text-primary font-semibold">{contactInfo[2].title}</h3>
+          <a href={contactInfo[2].link} class="text-sm" target="_blank"
+            >{contactInfo[2].description}</a
+          >
+        </div>
+      </div>
+
+      <div
+        class="col-span-3 flex items-start gap-3 p-4 rounded-md shadow-sm bg-gray-50"
+      >
+        <div class="flex-shrink-0">
+          <Image
+            src={contactInfo[3].icon}
+            alt={contactInfo[3].title}
+            width={24}
+            height={24}
+            class="object-contain"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h3 class="text-primary font-semibold">{contactInfo[3].title}</h3>
+          <a href={contactInfo[3].link} class="text-sm" target="_blank"
+            >{contactInfo[3].description}</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Tercera fila: Mapa -->
+    <div class="rounded-lg overflow-hidden shadow-md">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7522.369235944191!2d-99.13000982454884!3d19.490691381801195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9a3139e4897%3A0x117348243db53db7!2sRiobamba%20758%2C%20Lindavista%20Sur%2C%20Gustavo%20A.%20Madero%2C%2007300%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX%2C%20M%C3%A9xico!5e0!3m2!1ses-419!2ses!4v1733393055068!5m2!1ses-419!2ses"
+        width="100%"
+        height="400"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>

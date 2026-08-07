@@ -1,0 +1,147 @@
+---
+/*
+  DOCUMENTACIÓN DEL COMPONENTE FAQS
+  =================================
+
+  Este componente muestra una sección de Preguntas Frecuentes (FAQ) con diseño de acordeón.
+  Está pensado para resolver dudas comunes de pacientes o usuarios de manera clara y accesible.
+
+  CARACTERÍSTICAS:
+  - Diseño responsive con 2 columnas en pantallas grandes (texto + imagen)
+  - Componente interactivo con acordeón (usando `collapse` de DaisyUI o similar)
+  - La primera pregunta aparece expandida por defecto
+  - Respuestas soportan HTML (por ejemplo, `<b>`, `<a>`, `<br/>`) gracias al atributo `set:html`
+  - Imagen decorativa visible solo en pantallas grandes (`lg:flex`, `sm:hidden`)
+
+  ESTRUCTURA DE DATOS:
+  Utiliza un arreglo QUESTIONS con objetos que contienen:
+  - question: Texto de la pregunta
+  - answer: Respuesta en formato HTML string
+
+  PERSONALIZACIÓN:
+  - Las preguntas y respuestas se pueden modificar directamente en el array QUESTIONS
+  - Puedes cambiar la imagen decorativa en la etiqueta `<Image>`
+  - El color y el estilo del acordeón se ajustan con clases como `border-primary`, `bg-white`, `text-primary`
+
+  ACCESIBILIDAD:
+  - Las preguntas están envueltas en un componente de acordeón accesible (según la librería usada)
+  - Las respuestas se pueden navegar fácilmente con teclado si se implementa correctamente el componente `collapse`
+
+  EJEMPLO DE USO:
+  ```
+  ---
+  import FAQs from '../components/FAQs.astro';
+  ---
+  
+  <Layout>
+    <FAQs />
+  </Layout>
+  ```
+*/
+import { Image } from 'astro:assets';
+
+const QUESTIONS = [
+  {
+    question: 'Lorem ipsum dolor sit amet?',
+    answer:
+      '<b>$999 MXN</b><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis libero ut elit mollis posuere.',
+  },
+  {
+    question: 'Consectetur adipiscing elit?',
+    answer: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/><br/>
+      <b>Clinica Lorem Ipsum</b><br/>
+      <a
+        class="text-light"
+        href="#"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="text-primary font-semibold">Dirección:</span> Via Nullam 123, Ipsum City, 00000
+      </a><br/><br/>
+      <b>Centro Dolor Sit</b><br/>
+      <a
+        class="text-light"
+        href="#"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="text-primary font-semibold">Dirección:</span> Amet Street 456, Lorem District, 11111
+      </a>
+    `,
+  },
+  {
+    question: 'Sed do eiusmod tempor incididunt?',
+    answer:
+      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br/><br/>' +
+      '1. Duis aute irure dolor in reprehenderit<br/>' +
+      '2. In voluptate velit esse cillum<br/>' +
+      '3. Dolore eu fugiat nulla pariatur<br/>' +
+      '4. Excepteur sint occaecat cupidatat non proident',
+  },
+  {
+    question: 'Ut enim ad minim veniam?',
+    answer:
+      'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.',
+  },
+  {
+    question: 'Duis aute irure dolor in reprehenderit?',
+    answer:
+      'In voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.',
+  },
+  {
+    question: 'Excepteur sint occaecat cupidatat?',
+    answer:
+      'Non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet.',
+  },
+  {
+    question: 'Sunt in culpa qui officia deserunt?',
+    answer:
+      'Mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    question: 'Cillum dolore eu fugiat nulla pariatur?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.',
+  },
+];
+---
+
+<section class="faqs mb-8">
+  <div class="container w-full max-w-screen-lg mx-auto py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="grid-item flex flex-col gap-4 py-12 px-4 sm:px-8 lg:px-0">
+        <p class="text-primary font-bold text-3xl text-center md:text-left">
+          Preguntas Frecuentes:
+        </p>
+
+        <div class="flex flex-col gap-2 mt-4">
+          {
+            QUESTIONS.map((q, ix) => (
+              <div class="collapse collapse-arrow bg-white border-primary border-2">
+                <input type="radio" name="fasq-accordion" checked={ix === 0} />
+                <div class="collapse-title text-lg font-bold text-primary">
+                  {q.question}
+                </div>
+                <div class="collapse-content">
+                  <p set:html={q.answer} />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div
+        class="grid-item flex sm:hidden lg:flex justify-center lg:justify-end"
+      >
+        <Image
+          src="https://placehold.co/650x860"
+          alt="Preguntas Frecuentes"
+          height={860}
+          width={650}
+          loading="lazy"
+          class="object-contain"
+        />
+      </div>
+    </div>
+  </div>
+</section>

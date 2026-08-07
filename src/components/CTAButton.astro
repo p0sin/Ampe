@@ -1,0 +1,17 @@
+---
+interface Props {
+  text?: string;
+  url?: string;
+}
+
+const { text = 'Cita por WhatsApp', url = import.meta.env.PUBLIC_WA_LINK } =
+  Astro.props;
+---
+
+<a
+  href={url}
+  target="_blank"
+  class={`text-white px-4 md:px-16 py-4 rounded-md font-semibold bg-gradient-to-b from-[#0EB3EE] to-[#0B7EDE] text-sm md:text-md`}
+>
+  {text}
+</a>

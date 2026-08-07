@@ -1,0 +1,14 @@
+---
+import { Image } from 'astro:assets';
+import waIcon from '../assets/walogo.svg';
+---
+
+<a
+  class="whats fixed right-8 bottom-8 z-50 justify-center items-center flex text-center rounded-full text-white"
+  style="width: 50px; height: 50px; background: #04be04;"
+  href={import.meta.env.PUBLIC_WA_LINK}
+  target="_blank"
+  rel="noreferrer"
+>
+  <Image src={waIcon} alt="Whatsapp" width="25" height="35" />
+</a>
